@@ -26,6 +26,7 @@ class TaskController extends AbstractController
         ]);
     }
 
+    #[Route('/save-new-task', name: 'app_save_new_task')]
     #[Route('/save-task/{id}', name: 'app_save_task', methods: 'POST')]
     public function saveTask(
         EntityManagerInterface $em,
@@ -34,7 +35,7 @@ class TaskController extends AbstractController
     ): Response
     {
         try {
-            $task = $request->headers->get('referer') === 'new-task' ? new Task() : $taskRepository->findOneBy(["id" => $request->get('id')]);
+            $task = $request->attributes->get('_route') === 'app_save_new_task' ? new Task() : $taskRepository->findOneBy(["id" => $request->get('id')]);
             $task->setName($request->get('name'));
             $task->setDescription($request->get('description'));
 

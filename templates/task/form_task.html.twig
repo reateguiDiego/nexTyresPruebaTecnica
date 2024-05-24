@@ -3,7 +3,40 @@
 {% block title %}Form Task{% endblock %}
 
 {% block body %}
-<div>
-    
+<div class="central-area container-fluid">
+    <div class="card global-form">
+        {% if task is defined and task is not null %}
+            Editar Tarea
+            {% set post_action = url('app_save_task') %}
+        {% else %}
+            Nueva Tarea
+            {% set post_action = url('app_save_new_task') %}
+        {% endif %}
+    </div>
+    <div class="form-body">
+        <div class="p-3">
+            <form method="post" action="{{ post_action }}" class="row g-3 needs-validation">
+                <div class="col-md-6">
+                    <label class="form-label" for="name">Nombre de la tarea</label>
+                    <input class="form-control" type="text" id="name" name="name" placeholder="Tarea XXXX" value="{{ task is not null ? task.name }}" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="description">Descripción de la tarea</label>
+                    <input class="form-control" type="text" id="description" name="description" placeholder="Esto es una tarea" value="{{ task is not null ? task.description }}">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="name">Priodidad de la tarea</label>
+                    <select class="form-select" id="priority" name="priority" required>
+                        <option value="0">Baja</option>
+                        <option value="1">Media</option>
+                        <option value="2">Alta</option>
+                    </select>
+                </div>
+                <div class="col-12 gap-5 d-flex justify-content-center">
+                    <button type="submit" class="btn-xl btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 {% endblock %}
