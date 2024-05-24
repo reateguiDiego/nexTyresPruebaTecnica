@@ -22,6 +22,10 @@ class Task
     #[ORM\Column]
     private ?int $priority = null;
 
+    public function __construct() {
+        $this->priority = 0;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
