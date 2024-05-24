@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class TaskController extends AbstractController
 {
     #[Route('/new-task', name: 'app_new_task')]
-    #[Route('/edit-task/{id}', name: 'app_edit_task', methods: 'POST')]
+    #[Route('/edit-task/{id}', name: 'app_edit_task', methods: 'GET')]
     public function newTask(
         TaskRepository $taskRepository,
         Request $request

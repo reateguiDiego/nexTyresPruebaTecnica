@@ -7,7 +7,7 @@
     <div class="card global-form">
         {% if task is defined and task is not null %}
             Editar Tarea
-            {% set post_action = url('app_save_task') %}
+            {% set post_action = url('app_save_task', {'id': task.id}) %}
         {% else %}
             Nueva Tarea
             {% set post_action = url('app_save_new_task') %}

@@ -4,12 +4,11 @@
 
 {% block body %}
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/nexTyresPruebaTecnica/src/Controller/MainController.php'|file_link(0) }}">src/Controller/MainController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/nexTyresPruebaTecnica/templates/main/index.html.twig'|file_link(0) }}">templates/main/index.html.twig</a></code></li>
-    </ul>
+    <h1>¡Bievenido al mejor To-Do List hecho nunca para una prueba técnica! ✅</h1>
+    {% for task in tasks %}
+        <ul>
+            <li>{{task.name}} // <a href="{{ url('app_edit_task', {'id': task.id }) }}">Editar</a> // <a href="{{ url('app_delete_task', {'id': task.id }) }}">Eliminar</a></li>
+        </ul>
+    {% endfor %}
 </div>
 {% endblock %}
