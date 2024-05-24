@@ -51,14 +51,17 @@ class TaskController extends AbstractController
         }
     }
 
-    #[Route('/delete-task/{id}', name: 'app_delete_task', methods: 'POST')]
+    #[Route('/delete-task/{id}', name: 'app_delete_task', methods: 'GET')]
     public function deleteTask(
         TaskRepository $taskRepository,
+        EntityManagerInterface $em,
         Request $request
     ): Response
     {
         try {
-            $taskRepository->deleteOneBy(["id" => $request->get('id')]);
+            $task = $taskRepository->findOneBy(["id" => $request->get('id')]);
+            $em->remove($task);
+            $em->flush();
 
             return $this->redirectToRoute('app_home');
         } catch (\Exception $e) {
