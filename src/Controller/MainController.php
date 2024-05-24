@@ -15,8 +15,8 @@ class MainController extends AbstractController
     ): Response
     {
         try {
-            $tasks = $taskRepository->findAll();
-            
+            $tasks = $taskRepository->findAllOrderedByPriority();
+
         return $this->render('main/index.html.twig', [
             "tasks" => $tasks,
         ]);
