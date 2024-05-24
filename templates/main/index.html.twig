@@ -1,14 +1,29 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-<div class="example-wrapper">
-    <h1>¡Bievenido al mejor To-Do List hecho nunca para una prueba técnica! ✅</h1>
-    {% for task in tasks %}
-        <ul>
-            <li> {{ task.name }} // {{ task.description }} // 
-                {% if task.priority == 0 %} Baja {% elseif task.priority == 1 %} Media {% elseif task.priority == 2 %} Alta {% endif %} // 
-                <a href="{{ url('app_edit_task', {'id': task.id }) }}">Editar</a> // 
-                <a href="{{ url('app_delete_task', {'id': task.id }) }}">Eliminar</a></li>
-        </ul>
-    {% endfor %}
+<div class="central-area container-fluid">
+    <div class="card">
+        <div class="form-header">
+            <h3 class="text-center">¡Bievenido al mejor To-Do List!</h3>
+        </div>
+        <div class="table-body bg-light">
+            <div class="col-12 tableRow border-bottom border-success font-weight-bold">
+                <div class="col-3 float-start">Nombre</div>
+                <div class="col-3 float-start">Descripción</div>
+                <div class="col-3 float-start">Priodidad</div>
+                <div class="col-3 float-start">Opciones</div>
+            </div>
+                {% for task in tasks %}
+                    <div class="col-12 tableRow  border-bottom border-success mt-2">
+                        <div class="col-3 float-start">{{ task.name }}</div>
+                        <div class="col-3 float-start">{{ task.description }}</div>
+                        <div class="col-3 float-start">{% if task.priority == 0 %} Baja {% elseif task.priority == 1 %} Media {% elseif task.priority == 2 %} Alta {% endif %}</div>
+                        <div class="col-3 float-start">
+                            <div><a href="{{ url('app_edit_task', {'id': task.id }) }}">Editar</a></div>
+                            <div><a href="{{ url('app_delete_task', {'id': task.id }) }}">Eliminar</a></div>
+                        </div>
+                    </div>
+                {% endfor %}
+        </div>
+    </div>
 </div>
 {% endblock %}

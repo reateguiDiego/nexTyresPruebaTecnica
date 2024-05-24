@@ -14,7 +14,9 @@
         {% endblock %}
     </head>
     <body>
-        {{ include ('components/side_menu.html.twig') }}
-        {% block body %}{% endblock %}
+        <div id="maincontent" class="w-100">
+            {{ include ('components/side_menu.html.twig') }}
+            {% block body %}{% endblock %}
+        </div>
     </body>
 </html>

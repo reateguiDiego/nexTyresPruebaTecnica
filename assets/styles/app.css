@@ -1,3 +1,124 @@
+@import "../../node_modules/bootstrap/";
+@import url(https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Mulish:wght@300;400;500;600;700;800&display=swap);
+
+* {
+    font-family: Montserrat, 'sans-serif';
+}
+
+h1, h2, h3, h4, h5, h6,
+.btn-xl, a {
+    font-family: "Montserrat", sans-serif;
+}
+
 body {
-    background-color: lightgray;
+    font-family: "Mulish", sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+#maincontent {
+    display: flex;
+    margin-top: 50px;
+}
+
+.central-area {
+    margin: 30px 20px 0px 20px;
+}
+
+.container-fluid {
+    width: 80%;
+    padding: 0px 15px;
+    margin: 0px auto;
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 0px;
+    word-wrap: break-word;
+    border: none;
+    box-shadow: 0 0 8px rgb(0, 0, 0 / 0.3);
+    border-radius: 20px 20px 20px 20px;
+    background: white;
+    background-clip: border-box;
+}
+
+.global-form {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    box-shadow: 0 0 10px rgb(0, 0, 0 / 10%);
+}
+
+.form-header {
+    padding: 10px 0px 10px 15px;
+    border-radius: 20px 20px 0 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background: green;
+}
+
+.form-body {
+    padding: 10px;
+    border-radius: 20px 20px 0 0;
+    font-size: 16px;
+    font-weight: lighter;
+    color: gray;
+}
+
+select.form-select,
+input.form-control {
+    border-radius: 9px;
+    border: 1.5px solid grey;
+    color: black;
+    margin-top: 5px;
+}
+
+.btn-primary {
+    border: 2px solid green;
+    background: green;
+    color: white;
+}
+
+.btn-primary:hover {
+    border: 2px solid rgb(80, 221, 80);
+    background: rgb(80, 221, 80);
+    color: white;
+}
+
+.navigationbar {
+    height: calc(100vh - 100px);
+    width: 200px;
+    -webkit-transition: .5s;
+    transition: .5s;
+}
+
+.togglebar {
+    padding:  0px !important;
+    border-radius: 0px !important;
+    background: transparent !important;
+}
+
+.tableRow {
+    height: 50px;;
+}
+
+.menuItem:hover {
+    background-color: yellowgreen !important;
+    color: black;
+    border-radius: 10px;
+}
+
+.table-body {
+    padding: 10px;
+    border-radius: 0 0 20px 20px;
+    font-size: 16px;
+    font-weight: lighter;
+    color: gray;
 }
