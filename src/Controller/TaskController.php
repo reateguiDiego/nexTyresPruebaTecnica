@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 class TaskController extends AbstractController
@@ -19,11 +20,19 @@ class TaskController extends AbstractController
         Request $request
     ): Response
     {
-        $task = $taskRepository->findOneBy(["id" => $request->get('id')]);
+        try {
+            $task = $taskRepository->findOneBy(["id" => $request->get('id')]);
+            
+            if ($request->attributes->get('_route') === 'app_edit_task' && ($task === '' || $task === null)) {
+                throw new NotFoundHttpException("Task not found");
+            }
 
-        return $this->render('task/form_task.html.twig', [
-            "task" => $task
-        ]);
+            return $this->render('task/form_task.html.twig', [
+                "task" => $task
+            ]);
+        } catch (NotFoundHttpException $e) {
+            return $this->redirectToRoute('app_error_404');
+        }
     }
 
     #[Route('/save-new-task', name: 'app_save_new_task')]
@@ -36,6 +45,11 @@ class TaskController extends AbstractController
     {
         try {
             $task = $request->attributes->get('_route') === 'app_save_new_task' ? new Task() : $taskRepository->findOneBy(["id" => $request->get('id')]);
+
+            if ($task === '' || $task === null) {
+                throw new NotFoundHttpException("Task not found");
+            }
+            
             $task->setName($request->get('name'));
             $task->setDescription($request->get('description'));
 
@@ -47,7 +61,8 @@ class TaskController extends AbstractController
             $em->flush();
 
             return $this->redirectToRoute('app_home');
-        } catch (\Exception $e) {
+        } catch (NotFoundHttpException $e) {
+            return $this->redirectToRoute('app_error_404');
         }
     }
 
@@ -60,11 +75,16 @@ class TaskController extends AbstractController
     {
         try {
             $task = $taskRepository->findOneBy(["id" => $request->get('id')]);
+
+            if ($task === '' || $task === null) {
+                throw new NotFoundHttpException("Task not found");
+            }
             $em->remove($task);
             $em->flush();
 
             return $this->redirectToRoute('app_home');
-        } catch (\Exception $e) {
+        } catch (NotFoundHttpException $e) {
+            return $this->redirectToRoute('app_error_404');
         }
     }
 }
